@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .highlight { background-color: yellow; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Guía de jQuery; Actividad 16</h1>
+    
+    <h2> Selección de un elemento por id</h2>
+    <p id="parrafo-id">Este es un párrafo con id.</p>
+    <script>
+        $(document).ready(function() {
+            $("#parrafo-id").css("color", "blue");
+        });
+    </script>
+
+    <h2> Selección de elementos por tipo</h2>
+    <p>Parrafo 1</p>
+    <p>Parrafo 2</p>
+    <script>
+        $(document).ready(function() {
+            $("p").css("font-weight", "bold");
+        });
+    </script>
+
+    <h2> Selección de elementos utilizando selectores CSS</h2>
+    <p class="css-selector">Texto con clase específica</p>
+    <script>
+        $(document).ready(function() {
+            $(".css-selector").css("color", "red");
+        });
+    </script>
+
+    <h2> Método text() y text(valor)</h2>
+    <p id="texto">Texto inicial</p>
+    <button id="cambiar-texto">Cambiar texto</button>
+    <script>
+        $(document).ready(function() {
+            $("#cambiar-texto").click(function() {
+                $("#texto").text("Texto cambiado con jQuery");
+            });
+        });
+    </script>
+
+    <h2> Métodos attr(), attr(nombre, valor) y removeAttr()</h2>
+    <img id="imagen" src="https://via.placeholder.com/150" alt="Imagen ejemplo">
+    <button id="cambiar-src">Cambiar SRC</button>
+    <button id="eliminar-alt">Eliminar ALT</button>
+    <script>
+        $(document).ready(function() {
+            $("#cambiar-src").click(function() {
+                $("#imagen").attr("src", "https://via.placeholder.com/200");
+            });
+            $("#eliminar-alt").click(function() {
+                $("#imagen").removeAttr("alt");
+            });
+        });
+    </script>
+
+    <h2> Métodos addClass y removeClass</h2>
+    <p id="clase-ejemplo">Texto con clase dinámica</p>
+    <button id="agregar-clase">Agregar clase</button>
+    <button id="remover-clase">Remover clase</button>
+    <script>
+        $(document).ready(function() {
+            $("#agregar-clase").click(function() {
+                $("#clase-ejemplo").addClass("highlight");
+            });
+            $("#remover-clase").click(function() {
+                $("#clase-ejemplo").removeClass("highlight");
+            });
+        });
+    </script>
+
+    <h2> Método html() y html(valor)</h2>
+    <div id="html-ejemplo">Texto inicial en HTML</div>
+    <button id="cambiar-html">Cambiar HTML</button>
+    <script>
+        $(document).ready(function() {
+            $("#cambiar-html").click(function() {
+                $("#html-ejemplo").html("<strong>Texto cambiado con HTML dinámico</strong>");
+            });
+        });
+    </script>
+
+    <h2>Administración de eventos con jQuery</h2>
+    <p id="evento-ejemplo">Pasa el mouse por aquí</p>
+    <script>
+        $(document).ready(function() {
+            $("#evento-ejemplo").on("mouseover", function() {
+                $(this).css("color", "green");
+            });
+        });
+    </script>
+
+    <h2> Eventos mouseover y mouseout</h2>
+    <div id="hover-box" style="width: 100px; height: 100px; background-color: lightgrey;"></div>
+    <script>
+        $(document).ready(function() {
+            $("#hover-box").mouseover(function() {
+                $(this).css("background-color", "blue");
+            }).mouseout(function() {
+                $(this).css("background-color", "lightgrey");
+            });
+        });
+    </script>
+
+    <h2>Evento hover</h2>
+    <p id="hover-ejemplo">Hover para cambiar color</p>
+    <script>
+        $(document).ready(function() {
+            $("#hover-ejemplo").hover(
+                function() { $(this).css("color", "purple"); },
+                function() { $(this).css("color", "black"); }
+            );
+        });
+    </script>
+
+    <h2>Efectos con los métodos show y hide</h2>
+    <div id="texto-ocultar">Texto que se puede ocultar y mostrar</div>
+    <button id="ocultar">Ocultar</button>
+    <button id="mostrar">Mostrar</button>
+    <script>
+        $(document).ready(function() {
+            $("#ocultar").click(function() {
+                $("#texto-ocultar").hide();
+            });
+            $("#mostrar").click(function() {
+                $("#texto-ocultar").show();
+            });
+        });
+    </script>
+
+    <h2>Iteración por los elementos (each)</h2>
+    <ul id="lista-each">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+    </ul>
+    <script>
+        $(document).ready(function() {
+            $("#lista-each li").each(function(index) {
+                $(this).text("Elemento actualizado " + (index + 1));
+            });
+        });
+    </script>
+
+    <h2> Ajax: método load</h2>
+    <div id="contenido-ajax">Aquí se cargará contenido dinámico</div>
+    <button id="cargar-contenido">Cargar contenido</button>
+    <script>
+        $(document).ready(function() {
+            $("#cargar-contenido").click(function() {
+                $("#contenido-ajax").load("https://jsonplaceholder.typicode.com/posts/1", function(response, status, xhr) {
+                    if (status == "error") {
+                        $("#contenido-ajax").text("Error cargando contenido");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
